@@ -2,46 +2,53 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DivisionProgram;
+using System.Threading.Tasks;
 
-namespace DivisionManual;
-class Program
+namespace DivisionProgram
 {
-    static void Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Programa de división manual de números grandes");
-        Console.WriteLine("------------------------------------------------");
-
-        try
+        static void Main(string[] args)
         {
-            // Solicitar el primer número
-            Console.Write("Ingrese el dividendo A (hasta 150 dígitos): ");
-            string dividendInput = Console.ReadLine();
+            Console.WriteLine("División manual de números grandes (hasta 150 dígitos)");
+            Console.WriteLine("====================================================");
 
-            // Solicitar el segundo número
-            Console.Write("Ingrese el divisor B (hasta 150 dígitos): ");
-            string divisorInput = Console.ReadLine();
+            var validador = new ValidadorNumerico();
+            var operacion = new DivisionManual(validador);
+            var calculadora = new CalculadoraDivision(operacion);
+            var ui = new InterfazConsola();
 
-            // Crear los objetos BigNumber
-            BigNumber dividend = new BigNumber(dividendInput);
-            BigNumber divisor = new BigNumber(divisorInput);
+            int opcion;
+            do
+            {
+                try
+                {
+                    string dividendo = ui.SolicitarNumero("Ingrese el dividendo (A): ");
+                    string divisor = ui.SolicitarNumero("Ingrese el divisor (B): ");
 
-            // Crear el calculador e inyectar la implementación de división
-            DivisionCalculator calculator = new DivisionCalculator(new BigNumberDivider());
+                    string resultado = calculadora.Calcular(dividendo, divisor);
 
-            // Realizar la división
-            BigNumber result = calculator.Calculate(dividend, divisor);
+                    ui.MostrarResultado(resultado);
+                }
+                catch (Exception ex)
+                {
+                    ui.MostrarError(ex.Message);
+                }
 
-            // Mostrar el resultado
-            Console.WriteLine("\nResultado de la división:");
-            Console.WriteLine($"{dividend} ÷ {divisor} = {result}");
+                Console.WriteLine("\nMenú:");
+                Console.WriteLine("1. Continuar");
+                Console.WriteLine("2. Salir");
+                Console.Write("Seleccione una opción: ");
+
+                if (!int.TryParse(Console.ReadLine(), out opcion) || (opcion != 1 && opcion != 2))
+                {
+                    Console.WriteLine("Opción inválida. Intente nuevamente.");
+                    opcion = 0;
+                }
+
+            } while (opcion != 2);
+
+            Console.WriteLine("Gracias por usar el programa. ¡Hasta luego!");
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-
-        Console.WriteLine("\nPresione cualquier tecla para salir...");
-        Console.ReadKey();
     }
 }

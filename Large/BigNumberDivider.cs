@@ -4,11 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DivisionProgram
-
+namespace DivisionProgram.Large
 // Clase para división de números grandes (Principio de Responsabilidad Única)
-
-
 {
     public class BigNumberDivider : IMathOperation<BigNumber>
     {

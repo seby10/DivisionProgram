@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DivisionProgram
+namespace DivisionProgram.Large
 {
     // Clase para resta de números grandes (Principio de Responsabilidad Única)
 

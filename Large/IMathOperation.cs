@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DivisionProgram
+namespace DivisionProgram.Large
 {
     // Interfaz para operaciones matemáticas (Principio de Segregación de Interfaces)
     public interface IMathOperation<T>

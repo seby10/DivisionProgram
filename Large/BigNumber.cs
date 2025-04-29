@@ -4,14 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DivisionProgram
+namespace DivisionProgram.Large
 {
-
-
-
     // Clase para representar números grandes (Principio de Responsabilidad Única)
-
-
     public class BigNumber
     {
         private List<int> digits;
@@ -25,7 +20,6 @@ namespace DivisionProgram
             IsNegative = number.StartsWith("-");
             string absoluteValue = IsNegative ? number.Substring(1) : number;
 
-            // Validar que todos los caracteres sean dígitos
             if (!absoluteValue.All(char.IsDigit))
                 throw new ArgumentException("El número debe contener solo dígitos", nameof(number));
 
@@ -67,12 +61,12 @@ namespace DivisionProgram
             int sign = IsNegative ? -1 : 1;
 
             if (Length != other.Length)
-                return sign * (Length.CompareTo(other.Length));
+                return sign * Length.CompareTo(other.Length);
 
             for (int i = Length - 1; i >= 0; i--)
             {
                 if (digits[i] != other.digits[i])
-                    return sign * (digits[i].CompareTo(other.digits[i]));
+                    return sign * digits[i].CompareTo(other.digits[i]);
             }
 
             return 0; // Son iguales
